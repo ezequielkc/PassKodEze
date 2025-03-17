@@ -9,6 +9,7 @@ def gerar_senha():
     try:
         # Obtém o tamanho da senha digitado pelo usuário
         tamanho = int(entry_tamanho.get())
+        prefixo = entry_prefixo.get()  # Obtém o prefixo digitado pelo usuário
 
         # Validação: A senha precisa ter pelo menos 4 caracteres
         if tamanho < 4:
@@ -34,9 +35,9 @@ def gerar_senha():
         # Gera a senha aleatória
         senha = "".join(random.choice(caracteres) for _ in range(tamanho))
 
-        # Exibe a senha gerada no campo de entrada
+        # Exibe a senha gerada no campo de entrada com o prefixo
         entry_senha.delete(0, tk.END)
-        entry_senha.insert(0, senha)
+        entry_senha.insert(0, prefixo + senha)
     
     except ValueError:
         # Se o usuário digitar um valor inválido no tamanho, exibe erro
@@ -52,7 +53,7 @@ def copiar_senha():
 # Criando a interface gráfica
 root = tk.Tk()
 root.title("PassKodEze - Gerador de Senhas")  # Título da janela
-root.geometry("450x350")  # Define o tamanho da janela
+root.geometry("450x400")  # Define o tamanho da janela
 root.configure(bg="#34495E")  # Define a cor de fundo
 
 # Estilos globais para os widgets (rótulos, botões, etc.)
@@ -61,6 +62,13 @@ button_style = {"font": ("Arial", 12, "bold"), "width": 20}
 
 # Título no topo da janela
 tk.Label(root, text="Gerador de Senhas", font=("Arial", 16, "bold"), bg="#2C3E50", fg="white", pady=10).pack(fill="both")
+
+# Campo para definir o prefixo da senha
+frame_prefixo = tk.Frame(root, bg="#34495E")
+frame_prefixo.pack(pady=5)
+tk.Label(frame_prefixo, text="Prefixo da senha:", **label_style).pack(side="left")
+entry_prefixo = tk.Entry(frame_prefixo, font=("Arial", 12), width=10)
+entry_prefixo.pack(side="left", padx=5)
 
 # Campo para definir o tamanho da senha
 frame_tamanho = tk.Frame(root, bg="#34495E")
@@ -79,10 +87,10 @@ var_numeros = tk.BooleanVar()
 var_especiais = tk.BooleanVar()
 
 # Criando as caixas de seleção (Checkbuttons)
-tk.Checkbutton(frame_opcoes, text="Letras Maiúsculas", variable=var_maiusculas, **label_style).grid(row=0, column=0, sticky="w", padx=10)
-tk.Checkbutton(frame_opcoes, text="Letras Minúsculas", variable=var_minusculas, **label_style).grid(row=1, column=0, sticky="w", padx=10)
-tk.Checkbutton(frame_opcoes, text="Números", variable=var_numeros, **label_style).grid(row=2, column=0, sticky="w", padx=10)
-tk.Checkbutton(frame_opcoes, text="Caracteres Especiais", variable=var_especiais, **label_style).grid(row=3, column=0, sticky="w", padx=10)
+tk.Checkbutton(frame_opcoes, text="Letras Maiúsculas", variable=var_maiusculas, onvalue=True, offvalue=False, selectcolor="#34495E", **label_style).grid(row=0, column=0, sticky="w", padx=10)
+tk.Checkbutton(frame_opcoes, text="Letras Minúsculas", variable=var_minusculas, onvalue=True, offvalue=False, selectcolor="#34495E", **label_style).grid(row=1, column=0, sticky="w", padx=10)
+tk.Checkbutton(frame_opcoes, text="Números", variable=var_numeros, onvalue=True, offvalue=False, selectcolor="#34495E", **label_style).grid(row=2, column=0, sticky="w", padx=10)
+tk.Checkbutton(frame_opcoes, text="Caracteres Especiais", variable=var_especiais, onvalue=True, offvalue=False, selectcolor="#34495E", **label_style).grid(row=3, column=0, sticky="w", padx=10)
 
 # Campo de exibição da senha gerada
 entry_senha = tk.Entry(root, font=("Arial", 14), width=30, justify="center", bd=2, relief="sunken")
