@@ -28,7 +28,6 @@ Entre as possíveis melhorias para versões futuras do projeto:
 
 ## Contribuições  
 Sugestões para melhorias ou correções são bem-vindas. 
-Quem quiser contribuir pode abrir uma sugestão no repositório ou enviar uma atualização com melhorias no código.  
 
 ## Repositório  
 O código-fonte do projeto está disponível no GitHub. Para acessar, visite:  
